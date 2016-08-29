@@ -1,2 +1,5 @@
-.idea/*
-__pycache__/*
+Server/.idea/*
+Server/__pycache__/*
+
+Client/.idea/*
+Client/__pycache__/*
