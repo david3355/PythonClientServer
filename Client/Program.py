@@ -7,7 +7,13 @@ def eventprinter(event):
 def msghandler(msg):
     print(msg)
 
-client = Client('localhost', 3100, eventprinter, msghandler)
+host = 'localhost'
+port = 3100
+inp = input('Remote address of server (default: {}): '.format(host))
+if(inp != ""): host = inp
+inp = input('Remote port of server (default: {}): '.format(port))
+if(inp != ""): port = int(port)
+client = Client(host, port, eventprinter, msghandler)
 client.connect_to_server()
 reading = True
 while (reading):

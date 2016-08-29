@@ -24,15 +24,24 @@ class Connection:
         while (self.connopen):
             try:
                 data = self.conn.recv(2048).decode('utf-8')
-                self.msghandler(self, data)
+                self.processmsg(data)
             except:
                 self.close()
 
+    def send(self, message):
+        try:
+            self.conn.sendall(str.encode(message))
+        except:
+            self.eventprinter('Failed to send message!')
 
     def start_reader(self):
         self.connopen = True
         self.t_reader = Thread(None, self.reader)
         self.t_reader.start()
+
+    def processmsg(self, data):
+        self.msghandler(self, data)
+        self.send('Reply: ' + data)
 
 
     def __eq__(self, other):
